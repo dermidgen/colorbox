@@ -26,6 +26,7 @@
 		swf: false,
 		href: false,
 		title: false,
+		caption: false,
 		rel: false,
 		opacity: 0.9,
 		preloading: true,
@@ -81,6 +82,7 @@
 	$loadingBay,
 	$loadingOverlay,
 	$title,
+	$caption,
 	$current,
 	$slideshow,
 	$next,
@@ -136,6 +138,7 @@
 		settings.rel = settings.rel || element.rel || 'nofollow';
 		settings.href = settings.href || $(element).attr('href');
 		settings.title = settings.title || element.title;
+		settings.caption = settings.caption || $(element).attr('alt');
 	}
 
 	function launch(elem) {
@@ -192,7 +195,7 @@
 			}
 		}
 		
-		$current.add($prev).add($next).add($slideshow).add($title).hide();
+		$current.add($prev).add($next).add($slideshow).add($title).add($caption).hide();
 		
 		$close.html(settings.close).show();
 		
@@ -250,6 +253,7 @@
 			$loaded = $div("LoadedContent", 'width:0; height:0'),
 			$loadingOverlay = $div("LoadingOverlay").add($div("LoadingGraphic")),
 			$title = $div("Title"),
+			$caption = $div("Caption"),
 			$current = $div("Current"),
 			$next = $div("Next"),
 			$prev = $div("Previous"),
@@ -487,6 +491,7 @@
 				$loaded.show();
 				
 				$title.show().html(settings.title);
+				$caption.show().html(settings.caption);
 				
 				if (total > 1) { // handle grouping
 					$current.html(settings.current.replace(/\{current\}/, index + 1).replace(/\{total\}/, total)).show();
