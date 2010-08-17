@@ -650,15 +650,15 @@
 		} else if (settings.swf) { // Requires swfobject
 			settings.swf.version = settings.swf.version || "9.0.0"
 			settings.swf.expressInstall = settings.swf.expressInstall || "expressInstall.swf";
-			settings.swf.width = settings.swf.width || settings.width - 45;
-			settings.swf.height = settings.swf.height || settings.height - 75;
+			settings.swf.width = settings.swf.width || settings.innerWidth;
+			settings.swf.height = settings.swf.height || settings.innerHeight + 2;
 			settings.swf.flashVars = settings.swf.flashVars || {};
 			settings.swf.flashParams = settings.swf.flashParams || { wmode: "transparent", allowscriptaccess: "always", scale: "exactFit", loop: "false", menu: "false" };				
 			
-			prep('<div id="colorbox.flash">This page contains video that requires JavaScript and a recent version of Adobe\'s Flash Player. <a href="http://get.adobe.com/flashplayer/">Download the latest Adobe Flash Player</a> now to view this content.</div>');
+			prep('<div id="cboxSWFObject">This page contains video that requires JavaScript and a recent version of Adobe\'s Flash Player. <a href="http://get.adobe.com/flashplayer/">Download the latest Adobe Flash Player</a> now to view this content.</div>');
 
 			swfobject.registerObject(
-				"colorbox.flash",
+				"cboxSWFObject",
 				settings.swf.version,
 				settings.swf.expressInstall
 			);
@@ -666,7 +666,7 @@
 			$(document).bind('cbox_complete', function(){
 				swfobject.embedSWF(
 					settings.href,
-					"colorbox.flash",
+					"cboxSWFObject",
 					settings.swf.width,
 					settings.swf.height,
 					settings.swf.version,

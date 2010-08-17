@@ -10,6 +10,7 @@
 		</style>
 		<link media="screen" rel="stylesheet" href="colorbox.css" />
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 		<script src="../colorbox/jquery.colorbox.js"></script>
 		<script>
 			$(document).ready(function(){
@@ -20,9 +21,24 @@
 				$("a[rel='example4']").colorbox({slideshow:true});
 				$(".example5").colorbox();
 				$(".example6").colorbox({iframe:true, innerWidth:425, innerHeight:344});
-				$(".example7").colorbox({width:"80%", height:"80%", iframe:true});
-				$(".example8").colorbox({width:"50%", inline:true, href:"#inline_example1"});
-				$(".example9").colorbox({
+				$(".example7").colorbox({
+					innerWidth:"796",
+					innerHeight:"498",
+					swf:{
+						width: "796",
+						height: "496",
+						version:"9.0.0",
+						expressInstall:"../content/expressInstall.swf",
+						flashVars:{
+							title:"Ahhh! Helro!",
+							background:"../content/kimjongil.jpg"
+						}
+						/*flashParams: {} // non-default embed params /**/
+					}
+				});
+				$(".example8").colorbox({width:"80%", height:"80%", iframe:true});
+				$(".example9").colorbox({width:"50%", inline:true, href:"#inline_example1"});
+				$(".example10").colorbox({
 					onOpen:function(){ alert('onOpen: colorbox is about to open'); },
 					onLoad:function(){ alert('onLoad: colorbox has started to load the targeted content'); },
 					onComplete:function(){ alert('onComplete: colorbox has displayed the loaded content'); },
@@ -65,11 +81,12 @@
 		<p><a class='example5' href="../content/ajax.html" title="Homer Defined">Outside HTML (Ajax)</a></p>
 		<p><a class='example5' href="../content/flash.html" title="Royksopp: Remind Me">Flash / Video (Ajax/Embedded)</a></p>
 		<p><a class='example6' href="http://www.youtube.com/v/617ANIA5Rqs" title="The Knife: We Share Our Mother's Health">Flash / Video (Iframe/Direct Link To YouTube)</a></p>
-		<p><a class='example7' href="http://google.com">Outside Webpage (Iframe)</a></p>
-		<p><a class='example8' href="#">Inline HTML</a></p>
+		<p><a class='example7' href="../content/colorbox.swf" title="Colorbox SWFObject">Flash / SWF (SWFObject+FlashVars)</a></p>
+		<p><a class='example8' href="http://google.com">Outside Webpage (Iframe)</a></p>
+		<p><a class='example9' href="#">Inline HTML</a></p>
 		
 		<h2>Demonstration of using callbacks</h2>
-		<p><a class='example9' href="../content/marylou.jpg" title="Marylou on Cumberland Island">Example with alerts</a>. Callbacks and event-hooks allow users to extend functionality without having to rewrite parts of the plugin.</p>
+		<p><a class='example10' href="../content/marylou.jpg" title="Marylou on Cumberland Island">Example with alerts</a>. Callbacks and event-hooks allow users to extend functionality without having to rewrite parts of the plugin.</p>
 		
 		<!-- This contains the hidden content for inline calls -->
 		<div style='display:none'>
