@@ -23,6 +23,7 @@
 		html: false,
 		iframe: false,
 		photo: false,
+		swf: false,
 		href: false,
 		title: false,
 		rel: false,
@@ -142,7 +143,7 @@
 		element = elem;
 		
 		settings = $.extend({}, $(element).data(colorbox));
-		
+				
 		process(); // Convert functions to their returned values.
 		
 		if (settings.rel !== 'nofollow') {
@@ -646,6 +647,35 @@
 				}
 			};
 			img.src = href;
+		} else if (settings.swf) { // Requires swfobject
+			settings.swf.version = settings.swf.version || "9.0.0"
+			settings.swf.expressInstall = settings.swf.expressInstall || "expressInstall.swf";
+			settings.swf.width = settings.swf.width || settings.width - 45;
+			settings.swf.height = settings.swf.height || settings.height - 75;
+			settings.swf.flashVars = settings.swf.flashVars || {};
+			settings.swf.flashParams = settings.swf.flashParams || { wmode: "transparent", allowscriptaccess: "always", scale: "exactFit", loop: "false", menu: "false" };				
+			
+			prep('<div id="colorbox.flash">This page contains video that requires JavaScript and a recent version of Adobe\'s Flash Player. <a href="http://get.adobe.com/flashplayer/">Download the latest Adobe Flash Player</a> now to view this content.</div>');
+
+			swfobject.registerObject(
+				"colorbox.flash",
+				settings.swf.version,
+				settings.swf.expressInstall
+			);
+			
+			$(document).bind('cbox_complete', function(){
+				swfobject.embedSWF(
+					settings.href,
+					"colorbox.flash",
+					settings.swf.width,
+					settings.swf.height,
+					settings.swf.version,
+					settings.swf.expressInstall,
+					settings.swf.flashVars,
+					settings.swf.flashParams,
+					{}
+				);
+			});
 		} else {
 			$div().appendTo($loadingBay).load(href, function (data, status, xhr) {
 				prep(status === 'error' ? 'Request unsuccessful: ' + xhr.statusText : this);
